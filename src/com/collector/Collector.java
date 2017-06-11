@@ -1,7 +1,11 @@
 package com.collector;
 
+import com.collector.controller.ControllerCollector;
+import com.collector.controller.ControllerDadosUsoHardware;
 import com.collector.model.DadosConfiguracao;
+import com.collector.model.DadosUsoHardware;
 import com.collector.util.Constantes;
+import com.collector.util.Logger;
 
 public class Collector implements Runnable {
 
@@ -17,8 +21,11 @@ public class Collector implements Runnable {
 	
 	private long ratePacketsOut;
 	
-	public Collector(DadosConfiguracao dadosConfig, String ipAddress) {
+	private int  t;
+	
+	public Collector(String ipAddress, Long identificadorServidor) {
 		
+		DadosConfiguracao dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
 		this.interval = dadosConfig.getPeriodicidade();
 		snmpCollector = new SNMPCollector(dadosConfig, ipAddress);
 		ratePacketsIn = 0;
@@ -29,20 +36,17 @@ public class Collector implements Runnable {
 	
 	@Override
 	public void run() {
-		
-		String oidOut = "";
-		String oidIn = "";
-		
+
 		while (true) {
 			String response = snmpCollector.getBulk();
 			if (response == null) {
-				//adicionar no log
+				// adicionar no log
 			}
-			
+
 			response = response.substring(response.indexOf("VBS"), response.length());
-			response = response.substring(response.indexOf("[")+1, response.indexOf("]"));
+			response = response.substring(response.indexOf("[") + 1, response.indexOf("]"));
 			String[] values = response.split(";");
-			for (String value: values) {
+			for (String value : values) {
 				String[] v = value.trim().split("=");
 				long currentValue = Long.valueOf(v[1].trim());
 				if (v[0].contains("1.3.6.1.2.1.2.2.1.10")) {
@@ -59,7 +63,16 @@ public class Collector implements Runnable {
 					lastRateOut = currentValue;
 				}
 			}
-			System.out.println("RATE IN " + ratePacketsIn + " RATE OUT " + ratePacketsOut);
+
+//			if (t > 0) {
+//				DadosUsoHardware dados = ControllerDadosUsoHardware.getInstace().createDadosUsohardware(ratePacketsIn,
+//						ratePacketsOut, "", "", "", "", "");
+//				ControllerDadosUsoHardware.getInstace().enviarDadosUsoHardware(dados);
+//			}
+
+			t++;
+			Logger.logInScreen("COLLECTOR", "t = " + t + ": RATE IN " + ratePacketsIn + " RATE OUT " + ratePacketsOut);
+//			System.out.println("RATE IN " + ratePacketsIn + " RATE OUT " + ratePacketsOut);
 			try {
 				Thread.currentThread().sleep(interval);
 			} catch (InterruptedException e) {

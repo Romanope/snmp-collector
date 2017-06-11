@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.collector.model.DadosConfiguracao;
+import com.collector.model.DadosUsoHardware;
 import com.collector.util.Constantes;
 
 public class ResourceOffline implements IResource {
@@ -15,7 +16,7 @@ public class ResourceOffline implements IResource {
 	}
 	
 	@Override
-	public DadosConfiguracao obterConfiguracao(long identificadorServidor) {
+	public DadosConfiguracao obterConfiguracao(Long identificadorServidor) {
 		
 		return configuracaoes.get(identificadorServidor);
 	}
@@ -56,5 +57,11 @@ public class ResourceOffline implements IResource {
 		dados.setPeriodicidade(5000);
 		
 		configuracaoes.put(dados.getIdenficadorServidor(), dados);
+	}
+
+	@Override
+	public void enviarDadosColetados(DadosUsoHardware dados) {
+		// TODO Auto-generated method stub
+		
 	}
 }
