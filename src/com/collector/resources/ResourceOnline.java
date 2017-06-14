@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.collector.model.DadosConfiguracao;
+import com.collector.model.Servidor;
 import com.collector.model.DadosUsoHardware;
 import com.collector.util.Constantes;
 import com.google.gson.Gson;
@@ -16,11 +16,11 @@ import com.google.gson.Gson;
 public class ResourceOnline implements IResource {
 
 	@Override
-	public DadosConfiguracao obterConfiguracao(Long identificadorServidor) {
+	public Servidor obterConfiguracao(Long identificadorServidor) {
 		
 		String response = enviarRequisicao(Constantes.URL_OBTER_CONFIGURACAO, identificadorServidor.toString(), Constantes.CONTENT_TYPE_TEXT_PLAIN, Constantes.GET);
 
-		DadosConfiguracao dados = new Gson().fromJson(response, DadosConfiguracao.class);
+		Servidor dados = new Gson().fromJson(response, Servidor.class);
 		
 		return dados;
 	}
@@ -34,7 +34,7 @@ public class ResourceOnline implements IResource {
 			conn = (HttpURLConnection) url1.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod(methodType);
-			conn.setRequestProperty("Content-Type", conteudo + "; charset=UTF-8");
+			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 			
 			OutputStream os = conn.getOutputStream();
 			os.write(conteudo.getBytes());
@@ -67,5 +67,14 @@ public class ResourceOnline implements IResource {
 		String jsonDadosUso = new Gson().toJson(dados);
 		
 		enviarRequisicao(Constantes.URL_ENVIAR_DADOS_COLETADOS, jsonDadosUso, Constantes.CONTENT_TYPE_JSON, Constantes.POST);
+	}
+
+	@Override
+	public String cadastrarServidor(Servidor servidor) {
+		
+		String servidorJson = new Gson().toJson(servidor);
+		String response = enviarRequisicao(Constantes.URL_CADASTRAR_SERVIDOR, servidorJson, Constantes.CONTENT_TYPE_JSON, Constantes.POST);
+		servidor = new Gson().fromJson(response, Servidor.class);
+		return servidor.getId();
 	}
 }

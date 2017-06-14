@@ -1,6 +1,6 @@
 package com.collector.controller;
 
-import com.collector.model.DadosConfiguracao;
+import com.collector.model.Servidor;
 import com.collector.resources.IResource;
 import com.collector.resources.ResourceManager;
 
@@ -22,7 +22,7 @@ public class ControllerCollector {
 		return controllerCollector;
 	}
 	
-	public DadosConfiguracao obterDadosConfiguracao(Long identificadorServidor) {
+	public Servidor obterDadosConfiguracao(Long identificadorServidor) {
 		
 		return resources.obterConfiguracao(identificadorServidor);
 	}

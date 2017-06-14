@@ -29,4 +29,6 @@ public class Constantes {
 	public static final String GET = "GET";
 	
 	public static final String CONTENT_TYPE_JSON = "application/json";
+	
+	public static final String URL_CADASTRAR_SERVIDOR = "http://serverconfapi.azurewebsites.net/api/Servidores";
 }

@@ -2,20 +2,22 @@ package com.collector.model;
 
 import java.io.Serializable;
 
-public class DadosConfiguracao implements Serializable {
+public class Servidor implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private long idenficadorServidor;
+	private String id;
 	
-	private String nomeServidor;
+	private String nome;
+	
+	private String sistemaOperacional;
 	
 	private long periodicidade;
 	
-	private String[] oids;
+	private String oids;
 
 	private String securityName;
 	
@@ -35,16 +37,10 @@ public class DadosConfiguracao implements Serializable {
 	
 	private long timeout;
 	
-	public DadosConfiguracao() {
+	private String enderecoIP;
+	
+	public Servidor() {
 		
-	}
-
-	public String getNomeServidor() {
-		return nomeServidor;
-	}
-
-	public void setNomeServidor(String nomeServidor) {
-		this.nomeServidor = nomeServidor;
 	}
 
 	public long getPeriodicidade() {
@@ -55,20 +51,12 @@ public class DadosConfiguracao implements Serializable {
 		this.periodicidade = periodicidade;
 	}
 
-	public String[] getOids() {
+	public String getOids() {
 		return oids;
 	}
 
-	public void setOids(String[] oids) {
+	public void setOids(String oids) {
 		this.oids = oids;
-	}
-
-	public long getIdenficadorServidor() {
-		return idenficadorServidor;
-	}
-
-	public void setIdenficadorServidor(long idenficadorServidor) {
-		this.idenficadorServidor = idenficadorServidor;
 	}
 
 	public String getSecurityName() {
@@ -141,5 +129,37 @@ public class DadosConfiguracao implements Serializable {
 
 	public void setTimeout(long timeout) {
 		this.timeout = timeout;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSistemaOperacional() {
+		return sistemaOperacional;
+	}
+
+	public void setSistemaOperacional(String sistemaOperacional) {
+		this.sistemaOperacional = sistemaOperacional;
+	}
+
+	public String getEnderecoIP() {
+		return enderecoIP;
+	}
+
+	public void setEnderecoIP(String enderecoIP) {
+		this.enderecoIP = enderecoIP;
 	}
 }

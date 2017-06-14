@@ -2,7 +2,7 @@ package com.collector;
 
 import com.collector.controller.ControllerCollector;
 import com.collector.controller.ControllerDadosUsoHardware;
-import com.collector.model.DadosConfiguracao;
+import com.collector.model.Servidor;
 import com.collector.model.DadosUsoHardware;
 import com.collector.util.Constantes;
 import com.collector.util.Logger;
@@ -25,7 +25,7 @@ public class Collector implements Runnable {
 	
 	public Collector(String ipAddress, Long identificadorServidor) {
 		
-		DadosConfiguracao dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
+		Servidor dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
 		this.interval = dadosConfig.getPeriodicidade();
 		snmpCollector = new SNMPCollector(dadosConfig, ipAddress);
 		ratePacketsIn = 0;

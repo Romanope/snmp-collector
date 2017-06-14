@@ -21,13 +21,13 @@ import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
-import com.collector.model.DadosConfiguracao;
+import com.collector.model.Servidor;
 
 public class SNMPCollector {
 
 	private Snmp snmp;
 	
-	private DadosConfiguracao dadosConfig;
+	private Servidor dadosConfig;
 	
 	private String ipAddress;
 	
@@ -35,7 +35,7 @@ public class SNMPCollector {
 	
 	private PDU pdu;
 
-	public SNMPCollector(DadosConfiguracao dadosConfig, String ipAddress) {
+	public SNMPCollector(Servidor dadosConfig, String ipAddress) {
 		this.dadosConfig = dadosConfig;
 		this.ipAddress = ipAddress;
 		try {
@@ -96,10 +96,11 @@ public class SNMPCollector {
 	private PDU getPDU() {
 		
 		PDU pdu = new ScopedPDU();
-		pdu.setNonRepeaters(dadosConfig.getOids().length); 
+		String[] oids = dadosConfig.getOids().split("#");
+		pdu.setNonRepeaters(oids.length); 
 		pdu.setType(PDU.GETBULK);
 
-		for (String oid: dadosConfig.getOids()) {
+		for (String oid: oids) {
 			OID oid1 = new OID(oid);
 			pdu.add(new VariableBinding(oid1));
 		}
