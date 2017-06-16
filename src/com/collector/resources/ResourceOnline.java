@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import com.collector.model.Servidor;
 import com.collector.model.DadosUsoHardware;
@@ -16,9 +17,9 @@ import com.google.gson.Gson;
 public class ResourceOnline implements IResource {
 
 	@Override
-	public Servidor obterConfiguracao(Long identificadorServidor) {
+	public Servidor obterConfiguracao(String identificadorServidor) {
 		
-		String response = enviarRequisicao(Constantes.URL_OBTER_CONFIGURACAO, identificadorServidor.toString(), Constantes.CONTENT_TYPE_TEXT_PLAIN, Constantes.GET);
+		String response = enviarRequisicao(Constantes.URL_SERVICO_AGENTE, identificadorServidor, Constantes.CONTENT_TYPE_TEXT_PLAIN, Constantes.GET);
 
 		Servidor dados = new Gson().fromJson(response, Servidor.class);
 		
@@ -30,15 +31,22 @@ public class ResourceOnline implements IResource {
 		HttpURLConnection conn = null;
 		StringBuilder response = new StringBuilder();
 		try {
+			
+			if (Constantes.GET.equals(methodType)) {
+				url = url + "/" + conteudo;
+			}
 			URL url1 = new URL(url);
 			conn = (HttpURLConnection) url1.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod(methodType);
-			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-			
-			OutputStream os = conn.getOutputStream();
-			os.write(conteudo.getBytes());
-			os.flush();
+			conn.setRequestProperty("Content-Type", applicationType+";charset=UTF-8");
+
+			if (Constantes.POST.equals(methodType)) {
+				OutputStream os = conn.getOutputStream();
+				os.write(conteudo.getBytes());
+				os.flush();
+				os.close();
+			}
 			
 			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
@@ -73,7 +81,7 @@ public class ResourceOnline implements IResource {
 	public String cadastrarServidor(Servidor servidor) {
 		
 		String servidorJson = new Gson().toJson(servidor);
-		String response = enviarRequisicao(Constantes.URL_CADASTRAR_SERVIDOR, servidorJson, Constantes.CONTENT_TYPE_JSON, Constantes.POST);
+		String response = enviarRequisicao(Constantes.URL_SERVICO_AGENTE, servidorJson, Constantes.CONTENT_TYPE_JSON, Constantes.POST);
 		servidor = new Gson().fromJson(response, Servidor.class);
 		return servidor.getId();
 	}

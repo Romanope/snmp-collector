@@ -11,7 +11,7 @@ public class ControllerCollector {
 	private IResource resources;
 	
 	private ControllerCollector() {
-		this.resources = ResourceManager.getInstance(false);
+		this.resources = ResourceManager.getInstance(true);
 	}
 	
 	public synchronized static ControllerCollector getInstance() {
@@ -22,7 +22,7 @@ public class ControllerCollector {
 		return controllerCollector;
 	}
 	
-	public Servidor obterDadosConfiguracao(Long identificadorServidor) {
+	public Servidor obterDadosConfiguracao(String identificadorServidor) {
 		
 		return resources.obterConfiguracao(identificadorServidor);
 	}

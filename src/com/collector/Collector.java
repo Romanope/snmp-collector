@@ -23,7 +23,7 @@ public class Collector implements Runnable {
 	
 	private int  t;
 	
-	public Collector(String ipAddress, Long identificadorServidor) {
+	public Collector(String ipAddress, String identificadorServidor) {
 		
 		Servidor dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
 		this.interval = dadosConfig.getPeriodicidade();

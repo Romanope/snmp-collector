@@ -30,5 +30,33 @@ public class Constantes {
 	
 	public static final String CONTENT_TYPE_JSON = "application/json";
 	
-	public static final String URL_CADASTRAR_SERVIDOR = "http://serverconfapi.azurewebsites.net/api/Servidores";
+	public static final String URL_SERVICO_AGENTE = "http://serverconfapi.azurewebsites.net/api/Servidores";
+	
+	//NOME PARAMETROS DE CONFIGURACAO
+	
+	public static final String PAR_SERVER_ID = "PAR_SERVER_ID";
+	
+	public static final String PAR_SERVER_NOME = "PAR_SERVER_NOME";
+	
+	public static final String PAR_SERVER_SO = "PAR_SERVER_SO";
+	
+	public static final String PAR_SERVER_INTERVALO = "PAR_SERVER_INTERVALO";
+	
+	public static final String PAR_SERVER_OIDS = "PAR_INTERVALO_OIDS";
+	
+	public static final String PAR_SERVER_SECURITY_NAME = "PAR_SERVER_SECURITY_NAME";
+	
+	public static final String PAR_SERVER_USER = "PAR_SERVER_USER";
+	
+	public static final String PAR_SERVER_SENHA_AUTEN = "PAR_SERVER_SENHA_AUTEN";
+	
+	public static final String PAR_SERVER_SENHA_CRIP = "PAR_SERVER_SENHA_CRIP";
+	
+	public static final String PAR_SERVER_ALGORIT_AUTEN = "PAR_SERVER_ALGORIT_AUTEN";
+	
+	public static final String PAR_SERVER_ALGORIT_CRIP = "PAR_SERVER_ALGORIT_CRIP";
+	
+	public static final String PAR_SERVER_VERSION_SNMP = "PAR_SERVER_VERSION_SNMP";
+	
+	public static final String PAR_SERVER_SECURITY_LEVEL = "PAR_SERVER_SECURITY_LEVEL";
 }

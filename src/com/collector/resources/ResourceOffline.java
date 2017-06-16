@@ -17,7 +17,7 @@ public class ResourceOffline implements IResource {
 	}
 	
 	@Override
-	public Servidor obterConfiguracao(Long identificadorServidor) {
+	public Servidor obterConfiguracao(String identificadorServidor) {
 		
 		return configuracaoes.get(identificadorServidor);
 	}

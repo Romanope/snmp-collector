@@ -1,11 +1,19 @@
 package com.collector.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Properties;
+
+import com.collector.model.Servidor;
 
 public final class Util {
 
@@ -40,5 +48,39 @@ public final class Util {
 	
 	public static boolean isNullOrEmpty(String value) {
 		return value == null || value.length() == 0;
+	}
+	
+	public static void saveConfig(Servidor servidor) {
+	    try {
+	        Properties props = new Properties();
+	        props.setProperty(Constantes.PAR_SERVER_ID, servidor.getId());
+	        File f = new File(System.getProperty("user.home") + "/agente.properties");
+	        OutputStream out = new FileOutputStream( f );
+	        props.store(out, "id de identificação do servidor");
+	    }
+	    catch (Exception e ) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static String getParametroAgente(String nomeParametro) throws Exception {
+		Properties props = new Properties();
+	    InputStream is = null;
+	    try {
+	        File f = new File(System.getProperty("user.home") + "/agente.properties");
+	        is = new FileInputStream( f );
+	    }
+	    catch ( Exception e ) { is = null; }
+	 
+	    try {
+	        props.load( is );
+	    }
+	    catch ( Exception e ) {
+	    	System.out.println("ERRO INESPERADO");
+	    	e.printStackTrace();
+	    	throw e;
+	    }
+	 
+	   return props.getProperty(Constantes.PAR_SERVER_ID);
 	}
 }

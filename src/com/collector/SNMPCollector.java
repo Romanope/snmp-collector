@@ -55,7 +55,7 @@ public class SNMPCollector {
 		
 		byte[] auth = snmp.discoverAuthoritativeEngineID(target.getAddress(), 5000);
 		
-		snmp.getUSM().addUser(new OctetString(dadosConfig.getSecurityName()), new OctetString(auth), usmUser);
+		snmp.getUSM().addUser(new OctetString(dadosConfig.getUser()), new OctetString(auth), usmUser);
 		
 		pdu = getPDU();
 	}
@@ -76,7 +76,7 @@ public class SNMPCollector {
 		
 		UserTarget userTarget = new UserTarget();
 		userTarget.setAddress(GenericAddress.parse("udp:".concat(this.ipAddress).concat("/161")));
-		userTarget.setSecurityName(new OctetString(dadosConfig.getSecurityName()));
+		userTarget.setSecurityName(new OctetString(dadosConfig.getUser()));
 		userTarget.setVersion(dadosConfig.getVersionSnmp());
 		userTarget.setSecurityLevel(dadosConfig.getSecurityLevel());
 		userTarget.setTimeout(dadosConfig.getTimeout());

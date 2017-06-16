@@ -5,7 +5,7 @@ import com.collector.model.DadosUsoHardware;
 
 public interface IResource {
 
-	public Servidor obterConfiguracao(Long identificadorServidor);
+	public Servidor obterConfiguracao(String identificadorServidor);
 	
 	public void enviarDadosColetados(DadosUsoHardware dados);
 	
