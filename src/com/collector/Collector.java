@@ -6,10 +6,13 @@ import com.collector.model.Servidor;
 import com.collector.model.DadosUsoHardware;
 import com.collector.util.Constantes;
 import com.collector.util.Logger;
+import com.collector.util.Util;
 
 public class Collector implements Runnable {
 
 	private SNMPCollector snmpCollector;
+	
+	private String servidorID;
 	
 	private long interval;
 
@@ -25,13 +28,22 @@ public class Collector implements Runnable {
 	
 	public Collector(String ipAddress, String identificadorServidor) {
 		
-		Servidor dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
-		this.interval = dadosConfig.getPeriodicidade();
-		snmpCollector = new SNMPCollector(dadosConfig, ipAddress);
-		ratePacketsIn = 0;
-		ratePacketsOut = 0;
-		lastRateIn = 0;
-		lastRateOut = 0;
+//		Servidor dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
+		Servidor dadosConfig = null;
+		try {
+			dadosConfig = Util.getParametrosServidor();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (dadosConfig != null) {
+			servidorID = identificadorServidor;
+			this.interval = dadosConfig.getPeriodicidade();
+			snmpCollector = new SNMPCollector(dadosConfig, ipAddress);
+			ratePacketsIn = 0;
+			ratePacketsOut = 0;
+			lastRateIn = 0;
+			lastRateOut = 0;
+		}
 	}
 	
 	@Override
@@ -64,11 +76,11 @@ public class Collector implements Runnable {
 				}
 			}
 
-//			if (t > 0) {
-//				DadosUsoHardware dados = ControllerDadosUsoHardware.getInstace().createDadosUsohardware(ratePacketsIn,
-//						ratePacketsOut, "", "", "", "", "");
-//				ControllerDadosUsoHardware.getInstace().enviarDadosUsoHardware(dados);
-//			}
+			if (t > 0) {
+				DadosUsoHardware dados = ControllerDadosUsoHardware.getInstace().createDadosUsoHardware(servidorID, ratePacketsIn,
+						ratePacketsOut, "", "", "", "", "");
+				ControllerDadosUsoHardware.getInstace().enviarDadosUsoHardware(dados);
+			}
 
 			t++;
 			Logger.logInScreen("COLLECTOR", "t = " + t + ": RATE IN " + ratePacketsIn + " RATE OUT " + ratePacketsOut);

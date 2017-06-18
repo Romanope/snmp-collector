@@ -9,6 +9,8 @@ public class DadosUsoHardware implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private String servidorID;
+	
 	private long packetsIn;
 	
 	private long packetsOut;
@@ -77,5 +79,13 @@ public class DadosUsoHardware implements Serializable {
 
 	public void setTotalDiscoEmUso(String totalDiscoEmUso) {
 		this.totalDiscoEmUso = totalDiscoEmUso;
+	}
+
+	public String getServidorID() {
+		return servidorID;
+	}
+
+	public void setServidorID(String servidorID) {
+		this.servidorID = servidorID;
 	}
 }

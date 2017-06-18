@@ -23,10 +23,11 @@ public class ControllerDadosUsoHardware {
 		return controller;
 	}
 	
-	public DadosUsoHardware createDadosUsohardware(long packetsIn, long packetsOut, String percentualUsoCPU, String totalMemoria, String totalMemoriaEmUso, String totalDisco, String totalDiscoEmUso) {
+	public DadosUsoHardware createDadosUsoHardware(String servidorID, long packetsIn, long packetsOut, String percentualUsoCPU, String totalMemoria, String totalMemoriaEmUso, String totalDisco, String totalDiscoEmUso) {
 		
 		DadosUsoHardware dados = new DadosUsoHardware();
 		
+		dados.setServidorID(servidorID);
 		dados.setPacketsIn(packetsIn);
 		dados.setPacketsOut(packetsOut);
 		dados.setPercentualUsoCPU(percentualUsoCPU);

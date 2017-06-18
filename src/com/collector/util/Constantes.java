@@ -32,6 +32,8 @@ public class Constantes {
 	
 	public static final String URL_SERVICO_AGENTE = "http://serverconfapi.azurewebsites.net/api/Servidores";
 	
+	public static final String URL_SERVICO_GET_POST_DADOS_COLETADOS = "http://serverconfapi.azurewebsites.net/api/Monitoramentos";
+	
 	//NOME PARAMETROS DE CONFIGURACAO
 	
 	public static final String PAR_SERVER_ID = "PAR_SERVER_ID";
@@ -59,4 +61,8 @@ public class Constantes {
 	public static final String PAR_SERVER_VERSION_SNMP = "PAR_SERVER_VERSION_SNMP";
 	
 	public static final String PAR_SERVER_SECURITY_LEVEL = "PAR_SERVER_SECURITY_LEVEL";
+	
+	public static final String PAR_SERVER_IP = "PAR_SERVER_IP";
+	
+	public static final String PAR_SERVER_TIMEOUT = "PAR_SERVER_TIMEOUT";
 }

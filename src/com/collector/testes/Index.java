@@ -105,11 +105,11 @@ public class Index extends JFrame {
 		String id = "";
 		
 		try {
-			id = Util.getParametroAgente(Constantes.PAR_SERVER_ID);
+			id = Util.getParametrosServidor().getId();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		txtIdServidor.setText(id);
 		panelConfig.add(createLabel("ID SERVER:", 5, 5, 80, 22));
 		txtId = createTextField(80, 5, 370, 22);
 		txtId.setEnabled(false);

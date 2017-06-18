@@ -74,7 +74,7 @@ public class ResourceOnline implements IResource {
 		
 		String jsonDadosUso = new Gson().toJson(dados);
 		
-		enviarRequisicao(Constantes.URL_ENVIAR_DADOS_COLETADOS, jsonDadosUso, Constantes.CONTENT_TYPE_JSON, Constantes.POST);
+		enviarRequisicao(Constantes.URL_SERVICO_GET_POST_DADOS_COLETADOS, jsonDadosUso, Constantes.CONTENT_TYPE_JSON, Constantes.POST);
 	}
 
 	@Override
