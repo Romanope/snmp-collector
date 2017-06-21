@@ -77,11 +77,11 @@ public class Index extends JFrame {
 	
 	private JButton    btnAtualizar;
 	
-	private JButton btnConsultar;
+	private JButton    btnConsultar;
 	
 	private Index() {
-		this.setTitle("Coletor");
-		this.setSize(500, 400);
+		this.setTitle("Collector");
+		this.setSize(550, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -95,7 +95,6 @@ public class Index extends JFrame {
 	}
 	
 	private void start() {
-		
 		montarLayoutAbaServico();
 		montarLayoutAbaConfiguracoes();
 	}
@@ -223,7 +222,7 @@ public class Index extends JFrame {
 		txtIdServidor.setEnabled(false);
 		panel.add(txtIdServidor);
 		
-		log = createJtextArea(log, false, 5, 60, 490, 250, panel);
+		log = createJtextArea(log, false, 5, 60, 540, 250, panel);
 		Logger.setFieldLog(log);
 		
 		btnStart = new JButton("Start");
