@@ -28,13 +28,8 @@ public class Collector implements Runnable {
 	
 	public Collector(String ipAddress, String identificadorServidor) {
 		
-//		Servidor dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
-		Servidor dadosConfig = null;
-		try {
-			dadosConfig = Util.getParametrosServidor();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Servidor dadosConfig = ControllerCollector.getInstance().obterDadosConfiguracao(identificadorServidor);
+
 		if (dadosConfig != null) {
 			servidorID = identificadorServidor;
 			this.interval = dadosConfig.getPeriodicidade();
@@ -84,7 +79,6 @@ public class Collector implements Runnable {
 
 			t++;
 			Logger.logInScreen("COLLECTOR", "t = " + t + ": RATE IN " + ratePacketsIn + " RATE OUT " + ratePacketsOut);
-//			System.out.println("RATE IN " + ratePacketsIn + " RATE OUT " + ratePacketsOut);
 			try {
 				Thread.currentThread().sleep(interval);
 			} catch (InterruptedException e) {

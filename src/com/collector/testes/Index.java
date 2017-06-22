@@ -208,7 +208,6 @@ public class Index extends JFrame {
 		btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBounds(360, 350, 130, 22);
 		panelConfig.add(btnAtualizar);
-		
 	}
 	
 	private void montarLayoutAbaServico() {
